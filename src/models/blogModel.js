@@ -18,10 +18,21 @@ const blogSchema = new mongoose.Schema(
         imageUrl: {
             type: String,
             required: [true, "Please enter the blog's image"]
-        }, 
+        },
         comments: {
             type: Array
         }
+
+        // comments: [
+        //     {
+        //         type: String,
+        //         created: {type: Date, default: Date.now},
+
+        //     }
+        // ]
+        
+        
+        
         // createdAt: {
         //   type: Date,
         //   default: Date.now

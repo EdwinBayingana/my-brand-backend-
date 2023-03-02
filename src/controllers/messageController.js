@@ -4,8 +4,8 @@ class messages {
 
     static async sendMessage(req, res) {
         try {
-            const { username, email, subject, message } = req.body;
-            const newMessage = await messageModel.create({ username, email, subject, message });
+            const { names, email, subject, message } = req.body;
+            const newMessage = await messageModel.create({ names, email, subject, message });
             res.status(200).json({
                 message: "Message has been successfully sent",
                 data: newMessage 

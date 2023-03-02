@@ -54,6 +54,8 @@ console.log('Connected to mongoDB');
     })
 })
 
+export {app}
+
 
 
 

@@ -1,5 +1,5 @@
 import express  from "express";
-import messages from "../controllers/messageController"
+import messages from "../controllers/messageController.js"
 import verifyIsAdmin from "../middleware/verifyIsAdmin.js"
 
 const router = express.Router();
