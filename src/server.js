@@ -54,7 +54,7 @@ console.log('Connected to mongoDB');
     })
 })
 
-export {app}
+export default app
 
 
 
