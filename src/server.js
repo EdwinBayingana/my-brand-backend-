@@ -1,19 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
 
 
-import allRoutes from "./routes/allRoutes.js"
+// import allRoutes from "./routes/allRoutes.js"
 
+
+import createServer from "./utils/serverUtil.js"
+
+const app = createServer();
 
 // Dotenv configuration
 dotenv.config();
 
 // Create server instance
-const app = express();
+// export const app = express();
 
 app.use(                                                                //!To inquire more info here
     express.urlencoded({
@@ -23,7 +27,7 @@ app.use(                                                                //!To in
 
 
 app.use(cors());                                                        //!To inquire more info here
-app.use(bodyParser.json());                                             //? Used to convert every json we write into readable object info
+// app.use(bodyParser.json());                                             //? Used to convert every json we write into readable object info
 app.use(cookieParser());
 
 
@@ -33,7 +37,7 @@ app.get("/", (req,res) => {
     )
 })
 
-app.use("/api", allRoutes)
+// app.use("/api", allRoutes)
 
 
 
@@ -54,7 +58,7 @@ console.log('Connected to mongoDB');
     })
 })
 
-export default app
+
 
 
 

@@ -1,28 +1,7 @@
-// import add from "../sum.js"
-
-
-// describe('sum.js', function(){
-//     test('add two numbers', function(){
-//         expect(add(1, 2)).toBe(3);
-//     })
-// })
-
-
-
-
-
-
-// const sum = require("../sum.js")
-
-// test('Add 2 numbers', () => {
-//     expect(sum(1,2)).toBe(3)
-// })
-
-
-
-
 import supertest from "supertest"
-import app from "../server.js"
+import createServer from "../utils/serverUtil.js"
+
+const app = createServer();
 
 describe("Blog CRUD tests", () => {
     describe("Get a blog route", () => {
@@ -30,7 +9,7 @@ describe("Blog CRUD tests", () => {
 
             it("should return a 404", async () => {
                 const blogId = 123;
-                await supertest(app).get(`/api/blogs/${blogId}`).expect(404)
+                await supertest(app).get(`/blogs/${blogId}`).expect(404)
             })
         })
     })
