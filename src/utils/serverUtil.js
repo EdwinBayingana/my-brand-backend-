@@ -7,6 +7,8 @@ function createServer(){
     app.use(bodyParser.json()); 
 
     app.use("/api", allRoutes)
+
+    
     
     return app;
 }
