@@ -41,39 +41,39 @@ app.use("/api", allRoutes)
 const port = process.env.PORT;
 const host = process.env.HOST;
 
+ 
 
-
-// const con = () => mongoose.connect(process.env.MONGODB_URL, {
-//         useNewUrlParser: true,          //Ensures that the mongoDB drivers use the latest parser(used to compile data into user readable form)
-//         useUnifiedTopology: true        //Ensures that mongoDB uses the Topology engine
-//     })
-
-
-// //Instance to listen to our server
-// const startServer = () => app.listen(port);
-// mongoose.set('strictQuery', false)
-
-
-// Promise.all([con(), startServer()])      //This is a method in js that awaits for 2 functions to first complete, before proceeding with the code
-//     .then(() => {
-//         console.log("MongoDB connected");
-//         console.log(`Server listening at http://${host}:${port}`)
-//     })
-//     .catch((err) => console.log(err))
-
-
-
-
-mongoose
-.set('strictQuery', false)
-.connect('mongodb://localhost:27017')
-
-.then(()=>{
-console.log('Connected to mongoDB');
-    app.listen(port, () => {
-        console.log(`Server is listening at http://${host}:${port} `);
+const con = () => mongoose.connect(process.env.MONGODB_URL, {
+        useNewUrlParser: true,          //Ensures that the mongoDB drivers use the latest parser(used to compile data into user readable form)
+        useUnifiedTopology: true        //Ensures that mongoDB uses the Topology engine
     })
-})
+mongoose.set('strictQuery', false)
+
+//Instance to listen to our server
+const startServer = () => app.listen(port);  
+
+Promise.all([con(), startServer()])      //This is a method in js that awaits for 2 functions to first complete, before proceeding with the code
+    .then(() => {
+        console.log("MongoDB connected");
+        console.log(`Server listening at http://${host}:${port}`)
+    })
+    .catch((err) => console.log(err))
+
+
+
+
+
+
+// mongoose
+// .set('strictQuery', false)
+// .connect('mongodb://localhost:27017')
+
+// .then(()=>{
+// console.log('Connected to mongoDB');
+//     app.listen(port, () => {
+//         console.log(`Server is listening at http://${host}:${port} `);
+//     })
+// })
 
 
 export default app  
