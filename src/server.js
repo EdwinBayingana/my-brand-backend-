@@ -4,9 +4,9 @@ import cors from "cors"
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
-
-
 import allRoutes from "./routes/allRoutes.js"
+
+import swaggerDocs from "../swagger/swagger.js"
 
 
 // Dotenv configuration
@@ -38,10 +38,11 @@ app.use("/api", allRoutes)
 
 
 // Variable declaration 
-const port = process.env.PORT;
+const port = process.env.PORT || 6000; 
 const host = process.env.HOST;
 
  
+// ! 🍀 mongoDB Atlas below 🍀 
 
 const con = () => mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true,          //Ensures that the mongoDB drivers use the latest parser(used to compile data into user readable form)
@@ -54,24 +55,26 @@ const startServer = () => app.listen(port);
 
 Promise.all([con(), startServer()])      //This is a method in js that awaits for 2 functions to first complete, before proceeding with the code
     .then(() => {
-        console.log("MongoDB connected");
-        console.log(`Server listening at http://${host}:${port}`)
+        console.log("🟢 MongoDB connected");
+        console.log(` 🟢 Server listening at http://${host}:${port}`)
+
+        swaggerDocs(app, port);
     })
     .catch((err) => console.log(err))
 
 
 
-
-
+// ! 🏠 Local Host below 🏠 
 
 // mongoose
 // .set('strictQuery', false)
 // .connect('mongodb://localhost:27017')
 
 // .then(()=>{
-// console.log('Connected to mongoDB');
+// console.log('🟢 Connected to mongoDB');
 //     app.listen(port, () => {
-//         console.log(`Server is listening at http://${host}:${port} `);
+//         console.log(`🟢 Server is listening at http://${host}:${port}`);
+//          swaggerDocs(app, port);
 //     })
 // })
 
