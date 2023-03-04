@@ -17,12 +17,13 @@ const blogSchema = new mongoose.Schema(
         },
         imageUrl: {
             type: String,
-            required: [true, "Please enter the blog's image"]
+            // required: [true, "Please enter the blog's image"]
         },
         comments: {
             type: Array
         }
 
+        
         // comments: [
         //     {
         //         type: String,

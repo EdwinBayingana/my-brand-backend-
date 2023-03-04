@@ -16,8 +16,7 @@ class saveImage {
                 return res.status(200).json({
                     imageUrl: result.url
                 })
-            }
-            console.log(imageUrl);
+            } 
             res.status(500).json({
                 error: err
             });
