@@ -11,8 +11,7 @@ const router = Router();
  * @swagger
  * /Blogs/all
  *  get:
- *    tag:
- *      - Zedwin
+ *    tag: [post endpoints]
  *      description: Returns all blogs in out database
  *      responses:
  *        200:
