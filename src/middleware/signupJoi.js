@@ -39,7 +39,7 @@ const validateEmailorUsername = (req, res, next) => {
         if (result) {
             return response.error(res, 400, "username or email is already taken")
         }
-        next();
+        next(); 
     });
 };
 

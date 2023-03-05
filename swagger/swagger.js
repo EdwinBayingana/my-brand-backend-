@@ -15,6 +15,7 @@
                 jwt:{
                     type: 'http',
                     scheme: 'bearer',
+                    in: 'header', 
                     bearerFormat: 'JWT'
                 }
             }
@@ -23,7 +24,8 @@
             {
                 jwt: [],
             }
-        ]
+        ],
+        swagger: '3.0'
     },
     apis: ['../src/routes/*.js', './schemas/*.js'],
 
@@ -36,10 +38,10 @@
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
     //Docs in JSON format 
-    app.get('docs.json', (req, res) => {
+    app.get('/docs.json', (req, res) => {
         res.setHeader('Content-Type', 'application/json')
         res.send(swaggerSpec)
-    });
+    }); 
 
-    console.log(`Docs are available at http://127.0.0.1:${port}/docs`); 
+    // console.log(`Docs are available at http://127.0.0.1:${port}/docs`);  
  } 
