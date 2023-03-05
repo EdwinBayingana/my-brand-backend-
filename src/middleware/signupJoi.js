@@ -20,7 +20,7 @@ const validate = joi.object({
         'any.required': 'Password field can not be empty'
     })
 })
-
+ 
 const validateEmailorUsername = (req, res, next) => {
     const { email, username } = req.body;
     const { error } = validate.validate( req.body );
