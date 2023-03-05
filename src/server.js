@@ -1,88 +1,88 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors"
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser"
-import allRoutes from "./routes/allRoutes.js"
+// import db from './db.js';
+// import dotenv from 'dotenv';
+// import express from 'express';
+// import swaggerDocs from '../swagger/swagger.js';
+// import cors from 'cors';
 
-import swaggerDocs from "../swagger/swagger.js"
+// dotenv.config();
 
+// // create express app
+// const app = express();
+
+// app.use(cors());
+
+// db();
+
+// // define port to run express app
+// const port = process.env.PORT || 9000;
+
+// app.use(express.json());
+// app.use(
+//   express.urlencoded({
+//     extended: false,
+//   }),
+// );
+// // Add endpoint
+// app.get('/', (req, res) => {
+//   res.send('Hello World');
+// });
+
+// // Listen to server
+// export default app.listen(port, () => {
+//   console.log(`Server running at http://localhost:${port}`);
+//   swaggerDocs(app, port);
+//   app.use((req, res) => {
+//     res.status(404).json({
+//       message: "Page doesn't exist",
+//     });
+//   });
+// });
+
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import allRoutes from './routes/allRoutes.js';
+import db from './db.js';
+
+import swaggerDocs from '../swagger/swagger.js';
 
 // Dotenv configuration
 dotenv.config();
 
+db();
+
 // Create server instance
 const app = express();
 
-app.use(                                                                //!To inquire more info here
-    express.urlencoded({
-        extended: false,
-    })
-)
+app.use(
+  express.urlencoded({
+    extended: false,
+  }),
+);
 
-
-app.use(cors());                                                        //!To inquire more info here
-app.use(bodyParser.json());                                             //? Used to convert every json we write into readable object info
+app.use(cors()); //!To inquire more info here
+app.use(express.json()); //? Used to convert every json we write into readable object info
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.status(200).send(`<h1>Welcome to my Home Page</h1>`);
+});
 
-app.get("/", (req,res) => {
-    res.status(200).send(
-        `<h1>Welcome to our Home Page</h1>`
-    )
-})
+app.use('/api', allRoutes);
 
-app.use("/api", allRoutes)
+// Variable declaration
+const port = process.env.PORT || 7000;
 
+// Listen to the server
+export default app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+  swaggerDocs(app, port);
+  app.use((req, res) => {
+    res.status(404).json({
+      message: "Page doesn't exist",
+    });
+  });
+});
 
-
-// Variable declaration 
-const port = process.env.PORT || 6000; 
-const host = process.env.HOST;
-
- 
-
-
-
-
-
-
-// ! 🍀 mongoDB Atlas below 🍀 
-
-const con = () => mongoose.connect(process.env.MONGODB_URL, {
-        useNewUrlParser: true,          //Ensures that the mongoDB drivers use the latest parser(used to compile data into user readable form)
-        useUnifiedTopology: true        //Ensures that mongoDB uses the Topology engine
-    })
-mongoose.set('strictQuery', false) 
-
-//Instance to listen to our server
-const startServer = () => app.listen(port);  
-Promise.all([con(), startServer()])    
-  //This is a method in js that awaits for 2 functions to first complete, before proceeding with the code
-    .then(() => {
-        console.log("🟢 MongoDB connected");
-        console.log(` 🟢 Server listening at http://${process.env.MONGODB_URL}`) 
-        swaggerDocs(app, port);
-    })
-    .catch((err) => console.log(err))
-
-
-// ! 🏠 Local Host below 🏠   
-
-// mongoose
-// .set('strictQuery', false)
-// .connect('mongodb://localhost:27017', {useNewUrlParser: true})
-
-// .then(()=>{
-// console.log('🟢 Connected to mongoDB');
-//     app.listen(port, () => {
-//         console.log(`🟢 Server is listening at http://${host}:${port}`);
-//         swaggerDocs(app, port);  
-         
-//     })
-// })
- 
-
-
-export default app  
+// export default app
