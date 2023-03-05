@@ -7,16 +7,6 @@ import upload from '../middleware/multer.js';
 // Router method
 const router = Router();
 
-/**
- * @swagger
- * /Blogs/all
- *  get:
- *    tag: [post endpoints]
- *      description: Returns all blogs in out database
- *      responses:
- *        200:
- *          description: Get all blogs from my API
- */
 router.get('/', blogController.getBlogs);
 router.get('/:id', blogController.getBlog);
 router.post(

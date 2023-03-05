@@ -61,7 +61,7 @@ app.use(
   }),
 );
 
-app.use(cors()); //!To inquire more info here
+app.use(cors());
 app.use(express.json()); //? Used to convert every json we write into readable object info
 app.use(cookieParser());
 

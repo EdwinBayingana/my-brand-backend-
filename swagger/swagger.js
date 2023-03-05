@@ -40,6 +40,4 @@ export default function swaggerDocs(app, port) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
-
-  // console.log(`Docs are available at http://127.0.0.1:${port}/docs`);
 }
