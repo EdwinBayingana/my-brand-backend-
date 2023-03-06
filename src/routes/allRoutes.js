@@ -9,7 +9,7 @@ import commentRoute from '../routes/commentRoutes.js';
 const router = Router();
 
 /**
- * @openapi
+ * @swagger
  * /blogs
  *  get:
  *    tag: [post endpoints]
