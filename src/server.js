@@ -32,11 +32,12 @@ app.get('/', (req, res) => {
 app.use('/api', allRoutes);
 
 // Variable declaration
-const port = process.env.PORT || 7000;
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 // Listen to the server
 export default app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://${host}:${port}`);
   swaggerDocs(app, port);
   app.use((req, res) => {
     res.status(404).json({
