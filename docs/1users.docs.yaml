@@ -1,0 +1,79 @@
+paths:
+  #! Register a new user
+  /api/register:
+    post:
+      summary: Register a new User
+      tags: [User Endpoints]
+      description: Create a new user by filling the input fields below
+      requestBody:
+        description: Please fill all required fields
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegisterNewUser'
+      responses:
+        201:
+          description: New User successfully created
+        400:
+          description: Both passwords must match
+        403:
+          description: Email already exists
+  #! Login a user
+  /api/login:
+    post:
+      summary: Log in a User
+      tags: [User Endpoints]
+      description: User Login input fields below
+      requestBody:
+        description: Please fill all required fields
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        201:
+          description: User successfully logged in
+        401:
+          description: Invalid Credentials
+
+# schemas
+components:
+  schemas:
+    RegisterNewUser:
+      type: object
+      required:
+        - email
+        - username
+        - password
+        - confirmPassword
+        - isAdmin
+      properties:
+        email:
+          type: string
+          default: jordan@gmail.com
+        username:
+          type: string
+          default: Jordan
+        password:
+          type: string
+          default: thePassword
+        confirmPassword:
+          type: string
+          default: thePassword
+        isAdmin:
+          type: boolean
+          default: true
+    Login:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          default: jordan@gmail.com
+        password:
+          type: string
+          default: thePassword

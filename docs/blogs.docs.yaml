@@ -1,0 +1,74 @@
+paths:
+  # get all blogs
+  /api/blogs:
+    get:
+      summary: Get all blogs
+      tags: [Blog Endpoints]
+      description: Returns all blogs from our database
+      responses:
+        200:
+          description: Here are all the blogs, total is ${blogs.length} blogs
+
+  # get a specific blog
+  /api/blogs/{blogId}:
+    get:
+      summary: Get a specific blog
+      tags: [Blog Endpoints]
+      parameters:
+        - name: blogId
+          in: path
+          description: provide the blog's ID
+          required: true
+      description: Returns a specified blog from our database
+      responses:
+        200:
+          description: Blog successfully fetched
+        404:
+          description: Blog with id of ${id} was not found
+        500:
+          description: Blog ID must have 24 characters
+
+  # create a new blog
+  /api/blogs/:
+    post:
+      security: [{ jwt: [] }]
+      summary: Create a new blog
+      tags: [Blog Endpoints]
+      requestBody:
+        description: please fill all required fields
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateBlog'
+      responses:
+        201:
+          description: Blog Created successfully
+        500:
+          description: Server error 1.0
+
+# schemas
+components:
+  schemas:
+    CreateBlog:
+      type: object
+      required:
+        - title
+        - author
+        - body
+        - imageUrl
+      properties:
+        title:
+          type: string
+          default: AI in 2023
+        author:
+          type: string
+          default: John Doe
+        body:
+          type: string
+          default: Since the evolution of...
+        # imageUrl:
+        #   type: file
+        #   # default: ai2023.png
+        imageUrl:
+          type: file

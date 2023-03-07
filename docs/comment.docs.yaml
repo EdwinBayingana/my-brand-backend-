@@ -1,0 +1,38 @@
+paths:
+  # Comment on a blog
+  /api/comment/{blogId}:
+    post:
+      summary: Send a comment
+      tags: [Feedback Endpoints]
+      parameters:
+        - name: blogId
+          in: path
+          description: provide the blog's ID
+          required: true
+      description: comment on a blog
+      requestBody:
+        description: Please fill all required fields
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendComment'
+      responses:
+        200:
+          description: Comment successfully added
+
+# schemas
+components:
+  schemas:
+    SendComment:
+      type: object
+      required:
+        - userName
+        - comment
+      properties:
+        userName:
+          type: string
+          default: Odell Jr
+        comment:
+          type: string
+          default: Great article!
