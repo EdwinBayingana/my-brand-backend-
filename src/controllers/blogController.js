@@ -137,7 +137,7 @@ class blogController {
     try {
       if (!blogId) {
         res.status(401).json({
-          message: `Blog with id: ${id} was not found`,
+          message: `Blog with id ${id} was not found`,
         });
       } else {
         await Blog.findByIdAndDelete(id);

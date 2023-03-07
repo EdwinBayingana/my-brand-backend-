@@ -27,9 +27,13 @@ const loginController = async (req, res) => {
         });
       } else {
         // create a sign in token
-        const token = jwt.sign({ isAdmin: user.isAdmin }, process.env.SECRET, {
-          expiresIn: '1d',
-        });
+        const token = jwt.sign(
+          { email: user.email, isAdmin: user.isAdmin },
+          process.env.SECRET,
+          {
+            expiresIn: '1d',
+          },
+        );
         // console.log(token)
 
         // ! ................................................................Implement cookies......................................................
