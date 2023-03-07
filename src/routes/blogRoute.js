@@ -3,9 +3,10 @@ import blogController from '../controllers/blogController.js';
 import verifyIsAdmin from '../middleware/verifyIsAdmin.js';
 import cookieJwtAuth from '../middleware/cookieJwtAuth.js';
 import upload from '../middleware/multer.js';
+import express from 'express';
 
 // Router method
-const router = Router();
+const router = express.Router();
 
 router.get('/', blogController.getBlogs);
 router.get('/:id', blogController.getBlog);

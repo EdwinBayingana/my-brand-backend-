@@ -1,0 +1,52 @@
+paths:
+  # send a message/query
+  /api/messages:
+    get:
+      security: [{ jwt: [] }]
+      summary: Get all messages/queries
+      tags: [Feedback Endpoints]
+      description: Get all messages sent to the admin
+      responses:
+        200:
+          description: Total Messages ${allQueries.length}
+
+  # send a message/query
+  /api/messages/:
+    post:
+      summary: Send a message
+      tags: [Feedback Endpoints]
+      description: Sends a message/query to the admin
+      requestBody:
+        description: Please fill all required fields
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendMessage'
+      responses:
+        200:
+          description: Message has been successfully sent
+
+# schemas
+components:
+  schemas:
+    SendMessage:
+      type: object
+      required:
+        - names
+        - email
+        - subject
+        - message
+      properties:
+        names:
+          type: string
+          default: Odell Jr
+        email:
+          type: string
+          default: Odell@gmail.com
+        subject:
+          type: string
+          default: Information Inquiry
+        message:
+          type: string
+          default: Greetings Odell,...

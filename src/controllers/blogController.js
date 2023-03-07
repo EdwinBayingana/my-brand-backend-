@@ -1,9 +1,8 @@
 import { Blog } from '../models/blogModel.js';
-import express from 'express';
+// import express from 'express';
 import dotenv from 'dotenv';
-
+import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
-import cloudinary from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 class blogController {
@@ -15,18 +14,25 @@ class blogController {
       const { id } = req.params;
 
       const blog = await Blog.findOne({ _id: id });
+      // if(req.params.length === 25){
+      //   return res.status(500).json({
+      //     message: 'Blog ID must have 24 characters',
+      //   });
+      // }
       // console.log(blog);
       if (!blog) {
         return res.status(404).json({
-          message: `Blog with id: ${id} was not found`,
+          message: `Blog with id of ${id} was not found`,
         });
       } else {
         return res.status(200).json({
+          message: 'Blog successfully fetched',
           data: blog,
         });
       }
     } catch (error) {
       res.status(500).json({
+        message: 'Encountered a Server Error',
         message: error.message,
       });
     }
@@ -36,9 +42,9 @@ class blogController {
 
   static async createBlog(req, res) {
     cloudinary.config({
-      cloud_name: `${process.env.CLOUD_NAME}`,
-      api_key: `${process.env.CLOUDINARY_API_KEY}`,
-      api_secret: `${process.env.CLOUDINARY_API_SECRET}`,
+      cloud_name: 'dlw8ohn6p',
+      api_key: '858592235543923',
+      api_secret: '8W18Bv_01ebm21Y41WNreeKuceM7',
     });
     try {
       const storage = new CloudinaryStorage({
@@ -54,15 +60,14 @@ class blogController {
           return console.log(err);
         }
         const { title, author, body, imageUrl } = req.body;
-        const blogs = await Blog.find();
-        const id = blogs.length;
         const newBlog = await Blog.create({
-          id,
           title,
           author,
           body,
           imageUrl,
+          //imageUrl: req.file.path, //! Commented out for swagger presentation
         });
+        // console.log(req.file.path);
         res.status(200).json({
           message: 'Blog Created successfully',
           data: newBlog,
@@ -71,50 +76,18 @@ class blogController {
     } catch (error) {
       console.log(error);
       res.status(500).json({
+        message: 'Server error 1.0',
         message: error.message,
       });
     }
   }
 
-  //     static async createBlog(req,res){
-  //     dotenv.config();
-  //     cloudinary.config({
-  //         cloud_name: `${process.env.CLOUD_NAME}`,
-  //         api_key: `${process.env.CLOUDINARY_API_KEY}`,
-  //         api_secret: `${process.env.CLOUDINARY_API_SECRET}`
-  //     })
-  //     try {
-  //         cloudinary.uploader.upload(req.file.path, async (result, err) => {
-
-  //             const {title, body, author} = req.body
-  //             const newBlog = {title, body, author, imageUrl: result.url}
-  //             if(!result){
-  //                 return res.status(500).json({
-  //                     message: "Error while uploading the Image"
-  //                 })
-  //             } else {
-  //                 await Blog.create({title, body, author, imageUrl: result.url});
-
-  //                 return res.status(201).json({
-  //                             message: "New Blog created successfully",
-  //                             data: newBlog
-  //                 })
-  //             }
-  //         })
-
-  //     } catch (error) {
-  //         console.log(error);
-  //         res.status(500).json({
-  //             message: error.message
-  //         })
-  //     }
-  // }
-
-  // * READ a blog
+  // * READ all blogs
   static async getBlogs(req, res) {
     try {
       const blogs = await Blog.find();
       res.status(200).json({
+        message: `Here are all the blogs, total is ${blogs.length} blogs`,
         data: blogs,
       });
     } catch (error) {
@@ -135,7 +108,7 @@ class blogController {
 
       if (!blogToUpdate) {
         return res.status(404).json({
-          message: `Blog with id: ${id} was not found`,
+          message: `Blog with id ${id} was not found`,
         });
       } else {
         const blogUpdated = await Blog.findByIdAndUpdate(

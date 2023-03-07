@@ -1,6 +1,5 @@
-import { Blog } from "../models/blogModel.js";
-import jwt from "jsonwebtoken";
-
+import { Blog } from '../models/blogModel.js';
+import jwt from 'jsonwebtoken';
 
 class comment {
   static async createComment(req, res) {
@@ -9,12 +8,16 @@ class comment {
     const { userName } = req.body;
     const { comment } = req.body;
     const objectToPush = { name: userName, comment: comment };
-    const blogToComment = await Blog.findByIdAndUpdate(_id, { $push: { comments: objectToPush } }, { new: true })
+    const blogToComment = await Blog.findByIdAndUpdate(
+      _id,
+      { $push: { comments: objectToPush } },
+      { new: true },
+    );
     res.status(200).json({
-        message: "Blog has been found",
-        data: blogToComment
-    })
+      message: 'Comment successfully added',
+      data: blogToComment,
+    });
   }
 }
 
-export default comment
+export default comment;

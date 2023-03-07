@@ -8,16 +8,6 @@ import commentRoute from '../routes/commentRoutes.js';
 
 const router = Router();
 
-/**
- * @swagger
- * /blogs
- *  get:
- *    tag: [post endpoints]
- *      description: Returns all blogs in out database
- *      responses:
- *        200:
- *          description: Get all blogs from my API
- */
 router.use('/blogs', blogRoute);
 router.use('/register', registerRoute);
 router.use('/login', loginRoute);

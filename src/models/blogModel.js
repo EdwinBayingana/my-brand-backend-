@@ -1,55 +1,49 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 
 const blogSchema = new mongoose.Schema(
-    {
-        author: {
-            type: String,
-            required: [true, "Please enter the author's name"]
-        },
-        title: {
-            type: String,
-            required: [true, "Please enter the blog's title"],
-            default: 0                                          //! To ask for more info on why we use this 
-        },
-        body: {
-            type: String,
-            required: [true, "Please enter the blog's body"]
-        },
-        imageUrl: {
-            type: String,
-            // required: [true, "Please input an image"] 
-        },
-        comments: {
-            type: Array
-        }
-
-        
-        // comments: [
-        //     {
-        //         type: String,
-        //         created: {type: Date, default: Date.now},
-
-        //     }
-        // ]
-        
-        
-        
-        // createdAt: {
-        //   type: Date,
-        //   default: Date.now
-        // }
+  {
+    title: {
+      type: String,
+      required: [true, "Please enter the blog's title"],
+      default: 0, //! To ask for more info on why we use this
     },
-    {
-        timestamps: true                                        //? Creates 2 fields: date-created && date-modified
-    }
-)
+    author: {
+      type: String,
+      required: [true, "Please enter the author's name"],
+    },
+    body: {
+      type: String,
+      required: [true, "Please enter the blog's body"],
+    },
+    imageUrl: {
+      type: String,
+      required: [true, 'Please input an image'],
+    },
+    comments: {
+      type: Array,
+    },
+
+    // comments: [
+    //     {
+    //         type: String,
+    //         created: {type: Date, default: Date.now},
+
+    //     }
+    // ]
+
+    // createdAt: {
+    //   type: Date,
+    //   default: Date.now
+    // }
+  },
+  {
+    timestamps: true, //? Creates 2 fields: date-created && date-modified
+  },
+);
 
 const Blog = mongoose.model('Blogs', blogSchema);
 
-export {Blog}
-
-
-
+export { Blog };
 
 // const mongoose = require('mongoose')
 
@@ -62,7 +56,7 @@ export {Blog}
 //         quantity: {
 //             type: Number,
 //             required: true,
-//             default: 0                                          //! To ask for more info on why we use this 
+//             default: 0                                          //! To ask for more info on why we use this
 //         },
 //         price: {
 //             type: Number,

@@ -38,11 +38,12 @@ const loginController = async (req, res) => {
         });
 
         return res.status(200).json({
+          message: 'User successfully logged in',
+          token: token,
           data: {
             email: user.email,
             isAdmin: user.isAdmin,
           },
-          token: token,
         });
       }
     }

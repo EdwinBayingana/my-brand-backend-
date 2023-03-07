@@ -4,8 +4,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import allRoutes from './routes/allRoutes.js';
 import db from './db.js';
+import bodyParser from 'body-parser';
 
-import swaggerDocs from '../swagger/swagger.js';
+import swaggerDocs from '../docs/swagger.js';
 
 // Dotenv configuration
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(
 
 app.use(cors());
 app.use(express.json()); //? Used to convert every json we write into readable object info
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
@@ -35,7 +37,7 @@ app.use('/api', allRoutes);
 const port = process.env.PORT;
 const host = process.env.HOST;
 
-// Listen to the server
+//Listen to the server
 export default app.listen(port, () => {
   console.log(`Server running at http://${host}:${port}`);
   swaggerDocs(app, port);

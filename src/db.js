@@ -10,8 +10,8 @@ const options = {
 mongoose.set('strictQuery', true);
 const db = () => {
   mongoose.connect(process.env.MONGODB_URL, options).then(() => {
-    console.log('🟢 MongoDB connected');
-    console.log(`🟢 Database connected at http://${process.env.MONGODB_URL}`);
+    console.log('🧭 MongoDB connected ');
+    console.log(`🟢 Database connected at ${process.env.MONGODB_URL}`);
     // swaggerDocs(app, port);
   });
 };
