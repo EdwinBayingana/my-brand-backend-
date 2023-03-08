@@ -2,7 +2,8 @@ import { Router } from 'express';
 import blogController from '../controllers/blogController.js';
 import verifyIsAdmin from '../middleware/verifyIsAdmin.js';
 import cookieJwtAuth from '../middleware/cookieJwtAuth.js';
-import upload from '../middleware/multer.js';
+// import upload from '../middleware/multer.js';
+import upload from '../utils/multer.js';
 import express from 'express';
 
 // Router method
@@ -12,7 +13,7 @@ router.get('/getAllBlogs', blogController.getBlogs);
 router.get('/:id', blogController.getBlog);
 router.post(
   '/newBlog',
-  // upload.single('imageUrl'),
+  upload.single('imageUrl'),
   verifyIsAdmin,
   blogController.createBlog,
 );

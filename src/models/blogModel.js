@@ -5,7 +5,7 @@ const blogSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Please enter the blog's title"],
-      default: 0, //! To ask for more info on why we use this
+      // default: 0, //! To ask for more info on why we use this
     },
     author: {
       type: String,
@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      required: false,
+      required: true,
     },
     comments: {
       type: Array,

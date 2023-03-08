@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 // import { v2 as cloudinary } from 'cloudinary';
 // import multer from 'multer';
 // import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import cloudinary from '../utils/cloudinary.js';
+import upload from '../utils/multer.js';
 
 class blogController {
   //......................CRUD Operations......................
@@ -15,12 +17,6 @@ class blogController {
       const { id } = req.params;
 
       const blog = await Blog.findOne({ _id: id });
-      // if(req.params.length === 25){
-      //   return res.status(500).json({
-      //     message: 'Blog ID must have 24 characters',
-      //   });
-      // }
-      // console.log(blog);
       if (!blog) {
         return res.status(404).json({
           message: `Blog with id of ${id} was not found`,
@@ -64,38 +60,63 @@ class blogController {
   //   }
   // }
 
+  // static async createBlog(req, res) {
+  //   // cloudinary.config({
+  //   //   cloud_name: 'dlw8ohn6p',
+  //   //   api_key: '858592235543923',
+  //   //   api_secret: '8W18Bv_01ebm21Y41WNreeKuceM7',
+  //   // });
+  //   try {
+  //     // const storage = new CloudinaryStorage({
+  //     //   cloudinary,
+  //     //   params: {
+  //     //     folder: 'blogs-image',
+  //     //     // allowed_formats: ['jpg', 'png', 'jpeg'],
+  //     //   },
+  //     // });
+  //     // const upload = multer({ storage }).single('imageUrl');
+  //     upload(req, res, async (err) => {
+  //       if (err) {
+  //         // return console.log(err);
+  //       }
+  //       const { title, author, body, imageUrl } = req.body;
+  //       const newBlog = await Blog.create({
+  //         title,
+  //         author,
+  //         body,
+  //         imageUrl,
+  //         // imageUrl: req.file.path,
+  //       });
+  //       console.log(req.file.path);
+  //       // res.status(200).json({
+  //       //   message: 'Blog Created successfully',
+  //       //   data: newBlog,
+  //       // });
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     res.status(500).json({
+  //       message: 'Server error 1.0',
+  //       message: error.message,
+  //     });
+  //   }
+  // }
+
   static async createBlog(req, res) {
-    cloudinary.config({
-      cloud_name: 'dlw8ohn6p',
-      api_key: '858592235543923',
-      api_secret: '8W18Bv_01ebm21Y41WNreeKuceM7',
-    });
     try {
-      const storage = new CloudinaryStorage({
-        cloudinary,
-        params: {
-          folder: 'blogs-image',
-          // allowed_formats: ['jpg', 'png', 'jpeg'],
-        },
+      var result = await cloudinary.uploader.upload(req.file.path);
+      // res.json(result);
+      const { title, author, body, imageUrl } = req.body;
+      const newBlog = await Blog.create({
+        title,
+        author,
+        body,
+        imageUrl: result.url,
+        // imageUrl: req.file.path,
       });
-      const upload = multer({ storage }).single('imageUrl');
-      upload(req, res, async (err) => {
-        if (err) {
-          // return console.log(err);
-        }
-        const { title, author, body, imageUrl } = req.body;
-        const newBlog = await Blog.create({
-          title,
-          author,
-          body,
-          imageUrl,
-          // imageUrl: req.file.path,
-        });
-        console.log(req.file.path);
-        // res.status(200).json({
-        //   message: 'Blog Created successfully',
-        //   data: newBlog,
-        // });
+      res.status(200).json({
+        message: 'Blog Created successfully',
+        data: newBlog,
       });
     } catch (error) {
       console.log(error);

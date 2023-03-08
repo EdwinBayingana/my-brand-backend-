@@ -98,7 +98,7 @@ components:
         - title
         - author
         - body
-        # - imageUrl
+        - imageUrl
       properties:
         title:
           type: string
