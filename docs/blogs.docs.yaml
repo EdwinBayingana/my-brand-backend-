@@ -1,6 +1,6 @@
 paths:
   # get all blogs
-  /api/blogs:
+  /api/blogs/getAllBlogs:
     get:
       summary: Get all blogs
       tags: [Blog Endpoints]
@@ -29,7 +29,7 @@ paths:
           description: Blog ID must have 24 characters
 
   # create a new blog
-  /api/blogs/:
+  /api/blogs/newBlog:
     post:
       security: [{ jwt: [] }]
       summary: Create a new blog
@@ -48,7 +48,7 @@ paths:
           description: Server error 1.0
 
   # Update a specific blog
-  /api/blogs/{blogID}/:
+  /api/blogs/updateBlog/{blogID}:
     patch:
       security: [{ jwt: [] }]
       summary: Update a blog
@@ -72,7 +72,7 @@ paths:
           description: Blog with id ${id} was not found
 
   # Delete a specific blog
-  /api/blogs/{blogId}/:
+  /api/blogs/deleteBlog/{blogId}/:
     delete:
       security: [{ jwt: [] }]
       summary: Delete a specific blog

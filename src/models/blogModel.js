@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      required: [false, 'Please input an image'],
+      // required: [false, 'Please input an image'],
     },
     comments: {
       type: Array,

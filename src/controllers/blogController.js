@@ -1,9 +1,10 @@
 import { Blog } from '../models/blogModel.js';
-// import express from 'express';
+import express from 'express';
+// import path from 'path';
 import dotenv from 'dotenv';
-import { v2 as cloudinary } from 'cloudinary';
-import multer from 'multer';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
+// import { v2 as cloudinary } from 'cloudinary';
+// import multer from 'multer';
+// import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 class blogController {
   //......................CRUD Operations......................
@@ -40,6 +41,29 @@ class blogController {
 
   // * CREATE a blog
 
+  // static async createBlog(req, res) {
+  //   try {
+  //     const { title, author, body, imageUrl } = req.body;
+  //     const newBlog = await Blog.create({
+  //       title,
+  //       author,
+  //       body,
+  //       imageUrl,
+  //       // imageUrl: req.file.path,
+  //     });
+  //     res.status(200).json({
+  //       message: 'Blog Created successfully',
+  //       data: newBlog,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     res.status(500).json({
+  //       message: 'Server error 1.0',
+  //       message: error.message,
+  //     });
+  //   }
+  // }
+
   static async createBlog(req, res) {
     cloudinary.config({
       cloud_name: 'dlw8ohn6p',
@@ -51,13 +75,13 @@ class blogController {
         cloudinary,
         params: {
           folder: 'blogs-image',
-          allowed_formats: ['jpg', 'png', 'jpeg'],
+          // allowed_formats: ['jpg', 'png', 'jpeg'],
         },
       });
       const upload = multer({ storage }).single('imageUrl');
       upload(req, res, async (err) => {
         if (err) {
-          return console.log(err);
+          // return console.log(err);
         }
         const { title, author, body, imageUrl } = req.body;
         const newBlog = await Blog.create({
@@ -65,13 +89,13 @@ class blogController {
           author,
           body,
           imageUrl,
-          //imageUrl: req.file.path, //! Commented out for swagger presentation
+          // imageUrl: req.file.path,
         });
-        // console.log(req.file.path);
-        res.status(200).json({
-          message: 'Blog Created successfully',
-          data: newBlog,
-        });
+        console.log(req.file.path);
+        // res.status(200).json({
+        //   message: 'Blog Created successfully',
+        //   data: newBlog,
+        // });
       });
     } catch (error) {
       console.log(error);

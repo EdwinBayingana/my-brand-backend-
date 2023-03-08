@@ -8,15 +8,25 @@ import express from 'express';
 // Router method
 const router = express.Router();
 
-router.get('/', blogController.getBlogs);
+router.get('/getAllBlogs', blogController.getBlogs);
 router.get('/:id', blogController.getBlog);
 router.post(
-  '/',
-  upload.single('imageUrl'),
+  '/newBlog',
+  // upload.single('imageUrl'),
   verifyIsAdmin,
   blogController.createBlog,
 );
-router.put('/:id', cookieJwtAuth, verifyIsAdmin, blogController.updateBlog);
-router.delete('/:id', cookieJwtAuth, verifyIsAdmin, blogController.deleteBlog);
+router.put(
+  '/updateBlog/:id',
+  cookieJwtAuth,
+  verifyIsAdmin,
+  blogController.updateBlog,
+);
+router.delete(
+  '/deleteBlog/:id',
+  cookieJwtAuth,
+  verifyIsAdmin,
+  blogController.deleteBlog,
+);
 
 export default router;
