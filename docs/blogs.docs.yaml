@@ -16,7 +16,7 @@ paths:
       tags: [Blog Endpoints]
       parameters:
         - name: blogId
-          in: path
+          in: formData
           description: provide the blog's ID
           required: true
       description: Returns a specified blog from our database
@@ -101,13 +101,13 @@ components:
         - imageUrl
       properties:
         title:
-          type: string
+          type: formData
           default: AI in 2023
         author:
-          type: string
+          type: formData
           default: John Doe
         body:
-          type: string
+          type: 'formData'
           default: Since the evolution of...
         imageUrl:
           type: file

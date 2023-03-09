@@ -1,3 +1,4 @@
+// import { array } from 'joi';
 import mongoose from 'mongoose';
 
 const blogSchema = new mongoose.Schema(
@@ -22,20 +23,51 @@ const blogSchema = new mongoose.Schema(
     comments: {
       type: Array,
     },
+    likes: {
+      type: Array,
+    },
+    fireReaction: {
+      type: Array,
+    },
+    loveReaction: {
+      type: Array,
+    },
+    dislikeReaction: {
+      type: Array,
+    },
+    thinkingReaction: {
+      type: Array,
+    },
 
-    // comments: [
-    //     {
-    //         type: String,
-    //         created: {type: Date, default: Date.now},
-
-    //     }
-    // ]
-
-    // createdAt: {
-    //   type: Date,
-    //   default: Date.now
-    // }
+    // Reaction: {
+    //   type: Array,
+    //   fireReaction: {
+    //     type: Array,
+    //   },
+    //   loveReaction: {
+    //     type: Array,
+    //   },
+    //   dislikeReaction: {
+    //     type: Array,
+    //   },
+    //   thinkingReaction: {
+    //     type: Array,
+    //   },
+    // },
   },
+
+  // comments: [
+  //     {
+  //         type: String,
+  //         created: {type: Date, default: Date.now},
+
+  //     }
+  // ]
+
+  // createdAt: {
+  //   type: Date,
+  //   default: Date.now
+  // }
   {
     timestamps: true, //? Creates 2 fields: date-created && date-modified
   },
