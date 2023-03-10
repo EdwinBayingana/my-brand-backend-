@@ -3,9 +3,9 @@ import messageModel from '../models/messagesModel.js';
 class messages {
   static async sendMessage(req, res) {
     try {
-      const { names, email, subject, message } = req.body;
+      const { username, email, subject, message } = req.body;
       const newMessage = await messageModel.create({
-        names,
+        username,
         email,
         subject,
         message,

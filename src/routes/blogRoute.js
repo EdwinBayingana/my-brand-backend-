@@ -14,7 +14,7 @@ router.get('/:id', blogController.getBlog);
 router.post(
   '/newBlog',
   upload.single('imageUrl'),
-  verifyIsAdmin,
+  // verifyIsAdmin,
   blogController.createBlog,
 );
 router.put(

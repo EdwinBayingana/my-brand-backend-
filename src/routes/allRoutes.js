@@ -23,7 +23,8 @@ router.use('/login', loginRoute);
 router.use('/logout', logout);
 router.use('/messages', messagesRoute);
 router.use('/comment', commentRoute);
-router.use('/users', cookieJwtAuth, verifyIsAdmin, usersRoute);
+// router.use('/users', cookieJwtAuth, verifyIsAdmin, usersRoute); //!Commented out to initially allow easy integration
+router.use('/users', usersRoute);
 router.use('/like', cookieJwtAuth, likesRoute);
 
 //BLOG REACTIONS
