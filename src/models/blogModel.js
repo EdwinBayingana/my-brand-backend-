@@ -18,7 +18,7 @@ const blogSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      required: true,
+      // required: true,
     },
     comments: {
       type: Array,
@@ -38,36 +38,7 @@ const blogSchema = new mongoose.Schema(
     thinkingReaction: {
       type: Array,
     },
-
-    // Reaction: {
-    //   type: Array,
-    //   fireReaction: {
-    //     type: Array,
-    //   },
-    //   loveReaction: {
-    //     type: Array,
-    //   },
-    //   dislikeReaction: {
-    //     type: Array,
-    //   },
-    //   thinkingReaction: {
-    //     type: Array,
-    //   },
-    // },
   },
-
-  // comments: [
-  //     {
-  //         type: String,
-  //         created: {type: Date, default: Date.now},
-
-  //     }
-  // ]
-
-  // createdAt: {
-  //   type: Date,
-  //   default: Date.now
-  // }
   {
     timestamps: true, //? Creates 2 fields: date-created && date-modified
   },
@@ -76,34 +47,3 @@ const blogSchema = new mongoose.Schema(
 const Blog = mongoose.model('Blogs', blogSchema);
 
 export { Blog };
-
-// const mongoose = require('mongoose')
-
-// const productSchema = mongoose.Schema(
-//     {
-//         name: {
-//             type: String,
-//             required: [true, "Please enter a product name"]
-//         },
-//         quantity: {
-//             type: Number,
-//             required: true,
-//             default: 0                                          //! To ask for more info on why we use this
-//         },
-//         price: {
-//             type: Number,
-//             required: true
-//         },
-//         image: {
-//             type: String,
-//             required: false
-//         }
-//     },
-//     {
-//         timestamps: true                                        //? Creates 2 fields: date-created && date-modified
-//     }
-// )
-
-// const Product = mongoose.model('Product', productSchema);
-
-// module.exports = Product;

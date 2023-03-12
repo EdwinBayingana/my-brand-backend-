@@ -30,6 +30,26 @@ class like {
       data: blogToLike,
     });
   }
+  // static async getlikes(req, res) {
+  //   //!Fix console error caused by this function
+  //   const allBlogs = await Blog.find();
+  //   allBlogs.forEach((blog) => {
+  //     // console.log(index._id);
+  //     try {
+  //       const blogLikes = blog.likes;
+  //       console.log(blogLikes);
+  //       res.status(200).json({
+  //         message: `Total is ${blogLikes.length} Likes`,
+  //         data: blogLikes,
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
+  //       res.status(500).json({
+  //         message: error.message,
+  //       });
+  //     }
+  //   });
+  // }
 }
 
 export default like;

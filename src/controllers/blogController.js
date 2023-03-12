@@ -39,14 +39,15 @@ class blogController {
 
   static async createBlog(req, res) {
     try {
-      var result = await cloudinary.uploader.upload(req.file.path);
+      // var result = await cloudinary.uploader.upload(req.file.path);        //! Works with line 50, but ncommented due to integration
       // res.json(result);
       const { title, author, body, imageUrl } = req.body;
       const newBlog = await Blog.create({
         title,
         author,
         body,
-        imageUrl: result.url,
+        imageUrl,
+        // imageUrl: result.url,
         // imageUrl: req.file.path,
       });
       res.status(200).json({
