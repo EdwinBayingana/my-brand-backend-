@@ -25,6 +25,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
     const { isAdmin } = req.body;
     const _id = id;
+    // console.log(isAdmin, id);
 
     const userToUpdate = await User.findByIdAndUpdate(
       id,
@@ -48,4 +49,27 @@ const updateUser = async (req, res) => {
   }
 };
 
-export { listAllUsers, updateUser };
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  const userId = await User.findOne({ _id: id });
+
+  try {
+    if (!userId) {
+      res.status(401).json({
+        message: `User with id ${id} was not found`,
+      });
+    } else {
+      await User.findByIdAndDelete(id);
+      res.status(200).json({
+        message: 'The User was successfully deleted',
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export { listAllUsers, updateUser, deleteUser };

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const registerController = async (req, res) => {
   try {
-    const { email, username, password, confirmPassword, isAdmin } = req.body;
+    const { email, username, password, confirmPassword } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     let matchingPassword = bcrypt.compare(confirmPassword, hashedPassword);
     const newUser = await User.create({

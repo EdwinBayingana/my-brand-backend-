@@ -9,5 +9,6 @@ router.post('/', (req, res) =>
     message: 'Please specify which blog to like',
   }),
 );
+// router.get('/', like.getlikes);
 
 export default router;

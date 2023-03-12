@@ -25,7 +25,8 @@ router.use('/messages', messagesRoute);
 router.use('/comment', commentRoute);
 // router.use('/users', cookieJwtAuth, verifyIsAdmin, usersRoute); //!Commented out to initially allow easy integration
 router.use('/users', usersRoute);
-router.use('/like', cookieJwtAuth, likesRoute);
+// router.use('/like', cookieJwtAuth, likesRoute);
+router.use('/like', likesRoute);
 
 //BLOG REACTIONS
 router.use('/fire-reaction', cookieJwtAuth, fireRoute);

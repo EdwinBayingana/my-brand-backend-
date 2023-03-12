@@ -19,14 +19,14 @@ router.post(
 );
 router.put(
   '/updateBlog/:id',
-  cookieJwtAuth,
-  verifyIsAdmin,
+  // cookieJwtAuth,
+  // verifyIsAdmin,
   blogController.updateBlog,
 );
 router.delete(
   '/deleteBlog/:id',
-  cookieJwtAuth,
-  verifyIsAdmin,
+  // cookieJwtAuth,
+  // verifyIsAdmin,
   blogController.deleteBlog,
 );
 
