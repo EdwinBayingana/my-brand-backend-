@@ -25,13 +25,13 @@ const registerController = async (req, res) => {
     }
   } catch (error) {
     // console.log(error.code);
-    if (error.code === 11000) {
-      //11000 is the errorCode printed out when the email already exists
-      console.log(error);
-      return res.status(403).json({
-        message: 'Email already exists',
-      });
-    }
+    // if (error.code === 11000) {
+    //   //11000 is the errorCode printed out when the email already exists
+    //   console.log(error);
+    //   return res.status(403).json({
+    //     message: 'Email already exists',
+    //   });
+    // }
     res.status(500).json({
       message: error.message,
     });
