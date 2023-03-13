@@ -25,7 +25,12 @@ const loginController = async (req, res) => {
         return res.status(401).json({
           message: 'Invalid Credentials',
         });
-      } else {
+      }
+      // } else if (user.isAdmin === false) {
+      //   location.href =
+      //     'file:///Users/zeds/Documents/Coding/ANDELA/Core%20Concepts/my-brand-integrated/my-brand/index.html';
+      // }
+      else {
         // create a sign in token
         const token = jwt.sign(
           { email: user.email, username: user.username, isAdmin: user.isAdmin },

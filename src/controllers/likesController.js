@@ -6,9 +6,10 @@ class like {
     const { id } = req.params;
     let _id = id;
     const { token } = req.cookies;
-    const { username } = jwt.verify(token, process.env.SECRET);
+    //const { username } = jwt.verify(token, process.env.SECRET); //!Commented out for integration
     // console.log(username);
-    const objectToPush = { username: username };
+    // const objectToPush = { username: username };
+    const objectToPush = { message: 'Blog liked successfully' };
     const theSelectedBlog = await Blog.findOne({ _id: id });
     if (!theSelectedBlog) {
       return res.status(404).json({

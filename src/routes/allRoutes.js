@@ -29,10 +29,15 @@ router.use('/users', usersRoute);
 router.use('/like', likesRoute);
 
 //BLOG REACTIONS
-router.use('/fire-reaction', cookieJwtAuth, fireRoute);
-router.use('/love-reaction', cookieJwtAuth, loveRoute);
-router.use('/dislike-reaction', cookieJwtAuth, dislikeRoute);
-router.use('/thinking-reaction', cookieJwtAuth, thinkingRoute);
+
+router.use('/fire-reaction', fireRoute);
+router.use('/love-reaction', loveRoute);
+router.use('/dislike-reaction', dislikeRoute);
+router.use('/thinking-reaction', thinkingRoute);
+// router.use('/fire-reaction', cookieJwtAuth, fireRoute);
+// router.use('/love-reaction', cookieJwtAuth, loveRoute);
+// router.use('/dislike-reaction', cookieJwtAuth, dislikeRoute);
+// router.use('/thinking-reaction', cookieJwtAuth, thinkingRoute);
 
 router.use((req, res) => {
   return res.status(404).json({
